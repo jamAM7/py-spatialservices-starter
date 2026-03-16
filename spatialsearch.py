@@ -17,6 +17,7 @@ while (True):
 
     # survey_mark_result = get_survey_mark_info(float(address_result["x"]), float(address_result["y"]))
     survey_mark_result = get_survey_mark_info(address_result["x"], address_result["y"])
-    print ("Survey Mark Results: \n" + str(survey_mark_result) + "\n")
+    print("Survey Mark Results: \n" )
+    for mark in survey_mark_result:
+        print (str(mark) + "\n")
 
-    # 87a bunarba road gymea bay

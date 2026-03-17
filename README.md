@@ -1,2 +1,38 @@
 # py-spatialservices-starter
-Simple starter code for accessing NSW spatial services API
+
+A Python console app for querying NSW Spatial Services APIs to retrieve 
+address, lot, and survey mark information.
+
+## Requirements
+- Python 3.x
+
+## Setup
+
+1. Clone the repository
+   git clone https://github.com/jamAM7/py-spatialservices-starter.git
+
+2. Create and activate a virtual environment
+   python -m venv venv
+   venv\Scripts\activate        # Windows
+   source venv/bin/activate     # Mac/Linux
+
+3. Install dependencies
+   pip install -r requirements.txt
+
+## Usage
+
+Run the main script:
+   python spatialsearch.py
+
+Enter a full address when prompted, for example:
+   1 PACIFIC HIGHWAY NORTH SYDNEY
+
+The tool will return:
+- Address coordinates
+- Lot and plan number
+- Nearby survey marks within 500m
+
+Enter 'x' to exit.
+
+## Data Sources
+- NSW Spatial Services: https://portal.spatial.nsw.gov.au

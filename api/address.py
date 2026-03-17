@@ -8,6 +8,7 @@ def get_address_info(address_string):
         "where": f"address = '{address_string.upper()}'", # I have chosen to use = instead of LIKE "address%" because I want an exact match, so no risk of returning wrong address. This assumes the survyeor knows the exact address they are looking for.
         "outFields": "*",       # return all columns
         "returnGeometry": True, # include x, y coordinates
+        "outSR": "7856",
         "f": "json"
     }
     

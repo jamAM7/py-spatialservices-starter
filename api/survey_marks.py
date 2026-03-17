@@ -23,7 +23,8 @@ def get_survey_mark_info(x, y):
         "spatialRel":     "esriSpatialRelIntersects",
         "distance":       300,
         "units":          "esriSRUnit_Meter",    # ← missing this
-        "inSR":           "102100",
+        "inSR": "7856",    
+        "outSR": "7856", 
         "outFields":      "*",
         "returnGeometry": "true",
         "f":              "json"

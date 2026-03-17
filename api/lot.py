@@ -5,10 +5,11 @@ def get_lot_info(x, y):
     url = f"{BASE}/NSW_Land_Parcel_Property_Theme_multiCRS/FeatureServer/8/query"
     
     params = {
-        "geometry":       f'{{"x": {x}, "y": {y}, "spatialReference": {{"wkid": 102100}}}}',
+        "geometry":       f'{{"x": {x}, "y": {y}, "spatialReference": {{"wkid": 7856}}}}',
         "geometryType":   "esriGeometryPoint",      # it says it will always be esriGeometryPoint on the website
         "spatialRel":     "esriSpatialRelIntersects",
-        "inSR":           "102100",
+        "inSR": "7856",    
+        "outSR": "7856",
         "outFields":      "*",
         "returnGeometry": True,
         "f":              "json"
@@ -16,7 +17,16 @@ def get_lot_info(x, y):
     
     response = requests.get(url, params=params)
     data = response.json()
+
+
+    # # Test
+    # response = requests.get(url, params=params)
+    # print(response.url)
+    # print(response.json())
     
+
+
+
     features = data.get("features", [])
     if not features:
         print("No lot found")
@@ -25,6 +35,11 @@ def get_lot_info(x, y):
     feature = features[0]
     attrs = feature["attributes"]
     
+
+
+   
+
+
     return {
         "lotidstring":  attrs.get("lotidstring"),
         "lotnumber":    attrs.get("lotnumber"),

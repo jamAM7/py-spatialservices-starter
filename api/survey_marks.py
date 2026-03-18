@@ -104,14 +104,37 @@ def get_survey_mark_info(x, y):
     
     for feature in features:
         attrs = feature["attributes"]
+        # results.append({
+        #     "OBJECTID":   attrs.get("OBJECTID"),
+        #     "marktype":   attrs.get("marktype"),
+        #     "marknumber": attrs.get("marknumber"),
+        #     "markstatus": attrs.get("markstatus"),
+        #     "marksymbol": attrs.get("marksymbol"),
+        #     # "longitude":  attrs.get("longitude"),
+        #     # "latitude":   attrs.get("latitude"),
+        #     "x":          feature["geometry"]["x"],   # ← MGA2020 easting
+        #     "y":          feature["geometry"]["y"],   # ← MGA2020 northing
+        # })
         results.append({
-            "OBJECTID":   attrs.get("OBJECTID"),
-            "marktype":   attrs.get("marktype"),
-            "marknumber": attrs.get("marknumber"),
-            "markstatus": attrs.get("markstatus"),
-            "marksymbol": attrs.get("marksymbol"),
-            "longitude":  attrs.get("longitude"),
-            "latitude":   attrs.get("latitude"),
+            "marknumber":   attrs.get("marknumber"),
+            "marktype":     attrs.get("marktype"),
+            "markstatus":   attrs.get("markstatus"),
+            "marksymbol":   attrs.get("marksymbol"),
+            # MGA2020 coordinates
+            "easting":      feature["geometry"]["x"],
+            "northing":     feature["geometry"]["y"],
+            "zone":         attrs.get("mgazone"),
+            # Horizontal accuracy
+            "gda_class":    attrs.get("gdaclass"),
+            "pos_uncertainty": attrs.get("gdaposuncertainty_label"),
+            "loc_uncertainty": attrs.get("gdalocuncertainty_label"),
+            "source":       attrs.get("gdasource"),
+            "csf":          attrs.get("mgacsf2020"),
+            "convergence":  attrs.get("mgacon"),
+            # AHD71 height
+            "ahd_height":   attrs.get("ahdheight_label"),
+            "ahd_class":    attrs.get("ahdclass"),
+            "ausgeoid2020": attrs.get("ausgeoid2020"),
         })
     
     return results

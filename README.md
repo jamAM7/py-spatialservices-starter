@@ -9,23 +9,39 @@ address, lot, and survey mark information.
 ## Setup
 
 1. Clone the repository
-   git clone https://github.com/jamAM7/py-spatialservices-starter.git
+```
+git clone https://github.com/jamAM7/py-spatialservices-starter.git
+```
 
 2. Create and activate a virtual environment
-   python -m venv venv
-   venv\Scripts\activate        # Windows
-   source venv/bin/activate     # Mac/Linux
+```
+python -m venv venv
+```
+Windows:
+```
+venv\Scripts\activate
+```
+Mac/Linux:
+```
+source venv/bin/activate
+```
 
 3. Install dependencies
-   pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
 
 ## Usage
 
 Run the main script:
-   python spatialsearch.py
+```
+python spatialsearch.py
+```
 
 Enter a full address when prompted, for example:
-   1 PACIFIC HIGHWAY NORTH SYDNEY
+```
+1 PACIFIC HIGHWAY NORTH SYDNEY
+```
 
 The tool will return:
 - Address coordinates

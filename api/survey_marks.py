@@ -1,9 +1,10 @@
 import requests
 from config import BASE
 from api.address import get_address_coordinates
+from utils import expand_address
 
 def survey_mark_search():
-    address = input('Enter an address: ')
+    address = expand_address(input('Enter an address: '))
     distance = input('Enter a radius distance (metres): ')
 
     result = get_address_coordinates(address)
@@ -115,88 +116,3 @@ def get_survey_mark_info(x, y, distance):
         })
 
     return results
-
-
-
-# import requests
-# from config import BASE
-
-# from api.address import get_address_coordinates
-
-# def survey_mark_search():
-#     address = input('Enter an address: ')
-#     distance = input('Enter a radius distance: ')
-
-#     result = get_address_coordinates(address)
-#     if result:
-#         x, y = result["x"], result["y"]
-
-#     marks = get_survey_mark_info (x, y, distance)
-
-#     if marks is None:
-#         print('No marks found, try further radius & and check address')
-#     else:
-#         for mark in marks:
-#             print (str(mark) + "\n")
-
-# def survey_mark_meta_data(survey_mark):
-
-
-# def get_survey_mark_info(x, y, distance):
-#     url = f"{BASE}/SurveyMarkGDA2020_multiCRS/FeatureServer/0/query"
-    
-
-#     params = {
-#         "layerDefs":      0,
-#         "geometry":       f'{{"x": {x}, "y": {y}, "spatialReference": {{"wkid": 102100}}}}',
-#         "geometryType":   "esriGeometryPoint",
-#         "spatialRel":     "esriSpatialRelIntersects",
-#         "distance":       distance,
-#         "units":          "esriSRUnit_Meter",    # ← missing this
-#         "inSR": "7856",    
-#         "outSR": "7856", 
-#         "outFields":      "*",
-#         "returnGeometry": "true",
-#         "f":              "json"
-#     }
-    
-#     response = requests.get(url, params=params)
-#     data = response.json()
-
-#     # print(response.url)  # prints the exact URL requests constructed
-#     # print(response.json())
-    
-#     features = data.get("features", [])
-#     if not features:
-#         print("No survey mark found")
-#         return None
-    
-
-#     results = []
-    
-#     for feature in features:
-#         attrs = feature["attributes"]
-
-#         results.append({
-#             "marknumber":   attrs.get("marknumber"),
-#             "marktype":     attrs.get("marktype"),
-#             "markstatus":   attrs.get("markstatus"),
-#             "marksymbol":   attrs.get("marksymbol"),
-#             # MGA2020 coordinates
-#             "easting":      feature["geometry"]["x"],
-#             "northing":     feature["geometry"]["y"],
-#             "zone":         attrs.get("mgazone"),
-#             # Horizontal accuracy
-#             "gda_class":    attrs.get("gdaclass"),
-#             "pos_uncertainty": attrs.get("gdaposuncertainty_label"),
-#             "loc_uncertainty": attrs.get("gdalocuncertainty_label"),
-#             "source":       attrs.get("gdasource"),
-#             "csf":          attrs.get("mgacsf2020"),
-#             "convergence":  attrs.get("mgacon"),
-#             # AHD71 height
-#             "ahd_height":   attrs.get("ahdheight_label"),
-#             "ahd_class":    attrs.get("ahdclass"),
-#             "ausgeoid2020": attrs.get("ausgeoid2020"),
-#         })
-    
-#     return results

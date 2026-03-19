@@ -1,10 +1,11 @@
 import requests
 from config import BASE
 from api.address import get_address_coordinates
+from utils import expand_address
 
 
 def get_lps():
-    address = input('Enter an address: ')
+    address = expand_address(input('Enter an address: '))
     distance = input('Enter a radius distance (metres): ')
 
     result = get_address_coordinates(address)
@@ -75,26 +76,3 @@ def get_lot_info(x, y, distance):
         })
 
     return results
-
-
-
-
-    # feature = features[0]
-    # attrs = feature["attributes"]
-    
-
-
-   
-
-
-    # return {
-    #     "lotidstring":  attrs.get("lotidstring"),
-    #     "lotnumber":    attrs.get("lotnumber"),
-    #     "plannumber":   attrs.get("plannumber"),
-    #     "sectionnumber": attrs.get("sectionnumber"),
-    #     "startdate":     attrs.get("startdate"),
-    #     "enddate":       attrs.get("enddate"),
-    #     "centroidid":   attrs.get("centroidid"), # i thought this might be the centre point, but seems to be something else, returns none on
-    #     #"planlotarea":  attrs.get("planlotarea"), # dont think we'll need this
-    #     "geometry":     feature["geometry"]  # we'll need this for the survey mark query
-    # }

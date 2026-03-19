@@ -1,7 +1,29 @@
 import requests
 from config import BASE
+from api.address import get_address_coordinates
 
-def get_lot_info(x, y):
+
+def get_lps():
+    address = input('Enter an address: ')
+    distance = input('Enter a radius distance (metres): ')
+
+    result = get_address_coordinates(address)
+    if not result:
+        print('Address not found')
+        return
+    
+    x, y = result["x"], result["y"]
+
+    lots = get_lot_info(x, y, distance)
+
+    if lots is None:
+        print('No lots found, try a further radius and check address')
+    else:
+        for lot in lots:
+            print(str(lot) + "\n")
+
+
+def get_lot_info(x, y, distance):
     url = f"{BASE}/NSW_Land_Parcel_Property_Theme_multiCRS/FeatureServer/8/query"
     
     params = {
@@ -10,7 +32,7 @@ def get_lot_info(x, y):
         "spatialRel":     "esriSpatialRelIntersects",
         "inSR":           "7856",    
         "outSR":          "7856",
-        "distance":       50,
+        "distance":       distance,
         "units":          "esriSRUnit_Meter",
         "outFields":      "*",
         "returnGeometry": True,

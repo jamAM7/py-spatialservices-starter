@@ -1,5 +1,6 @@
 from flows.lot_plan_flow import lot_plan_section_flow
 from flows.survey_mark_flow import survey_mark_flow
+from flows.cre_flow import cre_flow
 from flows.navigation import prompt_menu
 
 while (True):
@@ -8,6 +9,7 @@ while (True):
             options={
                 "1": "Lot/Plan/Section",
                 "2": "Survey Mark",
+                "3": "CRE Enquiry",
                 "x": "Exit",
             }
         )
@@ -17,3 +19,5 @@ while (True):
             lot_plan_section_flow()
         elif choice == '2':
             survey_mark_flow()
+        elif choice == '3':
+            cre_flow()
